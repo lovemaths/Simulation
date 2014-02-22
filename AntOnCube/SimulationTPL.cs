@@ -8,20 +8,30 @@ using System.Threading.Tasks;
 
 namespace AntOnCube
 {
-    // simulation using Task Parallel Library, # of threads will be determined
-    // by the library
+    /// <summary>
+    /// Provide simulation method using Task Parallel Library.
+    /// </summary>
     public class SimulationTPL
     {
-      public static void Simuluation()
+        /// <summary>
+        /// Simulate the ants, using Task Parallel Library.
+        /// </summary>
+        public static void Simuluation()
         {
+            // Create and initilize ants.
             Ant[] ants = new Ant[GlobalData.numAnts];
             for (int i = 0; i < GlobalData.numAnts; i++)
                 ants[i] = new Ant();
-            Parallel.For(0, GlobalData.numAnts - 1, i =>
+
+            // Simulate each ants.
+            Parallel.For(0, GlobalData.numAnts, i =>
                 {
                     int local = i;
                     ants[local].Run();
                 });
+
+            // Count how many ants using how many steps, and store the 
+            // result in the dictionary frequency.
             foreach (Ant ant in ants)
             {
                 if (!GlobalData.frequency.ContainsKey(ant.steps))

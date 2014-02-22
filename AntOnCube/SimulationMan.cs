@@ -7,19 +7,30 @@ using System.Threading.Tasks;
 
 namespace AntOnCube
 {
-    // manually set up the number of threads, and do simulation.
+    /// <summary>
+    /// Provide simulation method, using the number of threads 
+    /// manually provided by user.
+    /// </summary>
     public class SimulationMan
     {
-        // simulation the ants in thread i
-        public static void SimulationThread(int i)
+        /// <summary>
+        /// Simulate the ants in a single thread.
+        /// </summary>
+        /// <param name="i">The specific thread.</param>
+        private static void SimulationThread(int i)
         {
-            int numAntsHere = GlobalData.numAnts / GlobalData.threads;
+            // The number of ants in the thread.
+            int numInThread = GlobalData.numAnts / GlobalData.threads;
+            
+            // Create and initilize the ants.
             List<Ant> ants = new List<Ant>();
-            for (int j = 0; j < numAntsHere; j++)
+            for (int j = 0; j < numInThread; j++)
                 ants.Add(new Ant());
-            Dictionary<int, int> countAntBySteps = GlobalData.countAntThread[i];
 
-            for (int j = 0; j < numAntsHere; j++)
+            // Count how many ants walked how many steps.
+            Dictionary<int, int> countAntBySteps = GlobalData.frequencyThread[i];
+
+            for (int j = 0; j < numInThread; j++)
             {
                 ants[j].Run();
                 if (!countAntBySteps.ContainsKey(ants[j].steps))
@@ -27,21 +38,27 @@ namespace AntOnCube
                 else
                     countAntBySteps[ants[j].steps]++;
             }
-
         }
+
+        /// <summary>
+        /// Simulate the ants, using multithreading.
+        /// </summary>
         public static void Simulation()
         {
+            // Initilize the frequency for each thread.
             for (int i = 0; i < GlobalData.threads; i++)
-                GlobalData.countAntThread.Add(new Dictionary<int, int>());
+                GlobalData.frequencyThread.Add(new Dictionary<int, int>());
 
             Thread[] myThreads = new Thread[GlobalData.threads];
 
+            // Initialized the threads.
             for (int i = 0; i < GlobalData.threads; i++)
             {
                 int local = i;
                 myThreads[i] = new Thread(() => SimulationThread(local));
             }
 
+            // Run each thread.
             for (int i = 0; i < GlobalData.threads; i++)
             {
                 int local = i;
@@ -54,14 +71,15 @@ namespace AntOnCube
                 myThreads[local].Join();
             }
 
-            foreach (var dict in GlobalData.countAntThread)
+            // Combine the frequency in each thread to a global frequency.
+            foreach (var dict in GlobalData.frequencyThread)
             {
-                foreach (var item in dict)
+                foreach (var pair in dict)
                 {
-                    if (GlobalData.frequency.ContainsKey(item.Key))
-                        GlobalData.frequency[item.Key] += item.Value;
+                    if (GlobalData.frequency.ContainsKey(pair.Key))
+                        GlobalData.frequency[pair.Key] += pair.Value;
                     else
-                        GlobalData.frequency.Add(item.Key, item.Value);
+                        GlobalData.frequency.Add(pair.Key, pair.Value);
                 }
             }
         }

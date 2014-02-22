@@ -5,6 +5,9 @@ using System.Text;
 
 namespace AntOnCube
 {
+    /// <summary>
+    /// Ant class.
+    /// </summary>
     public class Ant
     {
         // start and end position are fixed nodes, 0 and 7
@@ -13,6 +16,9 @@ namespace AntOnCube
 
         // number of steps from start to the end
         private int steps_ = 0;
+        /// <summary>
+        /// Number of steps from start node to end node.
+        /// </summary>
         public int steps
         {
             get { return steps_; }
@@ -23,19 +29,21 @@ namespace AntOnCube
         {
         }
 
-        // simulate the ant
+        /// <summary>
+        /// Simulate the ant walking on the cube.
+        /// </summary>
         public void Run()
         {
             Random rand = new Random(Guid.NewGuid().GetHashCode());
-            //Random rand = new Random();
+
             int curPosition = start_;
             while (curPosition != end_)
             {
-                // generate a random number from 0, 1, 2, means the three
-                // directions to go
-                int randDirection = rand.Next(3);
+                // Generate a random number from 0, 1, 2, and use it to 
+                // randomly choose an adjacent node to move to.
+                int randAdjNode = rand.Next(3);
                 // choose a random adjacent node to go
-                curPosition = GlobalData.GraphCube[curPosition,randDirection];
+                curPosition = GlobalData.CubeEdges[curPosition,randAdjNode];
                 steps++;
             }
         }

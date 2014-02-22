@@ -45,13 +45,14 @@
             this.ProbOfStepRes = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.validNumAnt = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ProbOfStep = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Compute_Prob = new System.Windows.Forms.Button();
             this.GenerateDistribution = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -174,19 +175,20 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(30, 44);
+            this.chart1.Location = new System.Drawing.Point(19, 44);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
-            series1.Name = "Steps";
+            series1.Name = "Steps \\n Probability";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(387, 326);
+            this.chart1.Size = new System.Drawing.Size(402, 338);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.validNumAnt);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.numOfAnts);
@@ -201,6 +203,26 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Simulation Input";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // validNumAnt
+            // 
+            this.validNumAnt.AutoSize = true;
+            this.validNumAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validNumAnt.Location = new System.Drawing.Point(345, 44);
+            this.validNumAnt.Name = "validNumAnt";
+            this.validNumAnt.Size = new System.Drawing.Size(0, 15);
+            this.validNumAnt.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(10, 123);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(136, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "(Automatic Parallel if empty)";
             // 
             // groupBox2
             // 
@@ -273,16 +295,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Step Distribution";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(10, 123);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(136, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "(Automatic Parallel if empty)";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,6 +342,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox ProbOfStep;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label validNumAnt;
     }
 }
 
