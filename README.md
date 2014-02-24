@@ -1,2 +1,1 @@
-tmp2
-====
+Simulation of ants on cube.
