@@ -95,14 +95,14 @@ namespace AntOnCube
             set { mean_ = value; }
         }
 
-        private static double variance_ = 0;
+        private static double deviation_ = 0;
         /// <summary>
-        /// The variables of the steps.
+        /// The standard deviation of the steps.
         /// </summary>
-        public static double variance
+        public static double deviation
         {
-            get { return variance_; }
-            set { variance_ = value; }
+            get { return deviation_; }
+            set { deviation_ = value; }
         }
         #endregion
 
@@ -124,7 +124,12 @@ namespace AntOnCube
         /// Count how many ants using how many steps, thread by thread.
         /// </summary>
         public static List<Dictionary<int, int>> frequencyThread = new List<Dictionary<int, int>>();
-        public static int MaxAxisX = 35;
+        
+        /// <summary>
+        /// When we show the distribution bar chart, only show the ants who run at most maxAxisX
+        /// steps.
+        /// </summary>
+        public static int maxAxisX = 35;
        
         #endregion
     }

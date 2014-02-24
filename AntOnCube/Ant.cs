@@ -14,10 +14,10 @@ namespace AntOnCube
         private const int start_ = 0;
         private const int end_ = 7;
 
-        // number of steps from start to the end
+        // number of steps/seconds from start to the end
         private int steps_ = 0;
         /// <summary>
-        /// Number of steps from start node to end node.
+        /// Number of steps/seconds from start node to end node.
         /// </summary>
         public int steps
         {

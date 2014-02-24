@@ -15,20 +15,23 @@ namespace AntOnCube
 
         /// <summary>
         /// When the Simulate button is clicked, the program makes the calculation
-        /// and display the mean and variance on the screen.
+        /// and display the mean and standard deviation on the screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Simulate_Click(object sender, EventArgs e)
         {
+
+            // Clean up the history from previous calculation
+            GlobalData.frequencyThread.Clear();
+            GlobalData.frequency.Clear();
+
             try
             {
                 // Try to parse the string for num of threads to int.
                 GlobalData.threads = int.Parse(numOfThreads.Text);
-
-                // If there are more threads than ants, reduce the number of the 
-                // threads to the number of ants.
-                GlobalData.threads = Math.Min(GlobalData.threads, GlobalData.numAnts);
+                if(GlobalData.threads<=0)
+                    throw new FormatException();
 
                 // Use the manual parallel instead of using Task Parallel Library.
                 GlobalData.useTPL = false;
@@ -40,14 +43,16 @@ namespace AntOnCube
                 GlobalData.useTPL = true;
             }
 
-            // Clean up the history from previous calculation
-            GlobalData.frequencyThread.Clear();
-            GlobalData.frequency.Clear();
-
             try
             {
                 // Try to parse the string for num of ants into int.
                 GlobalData.numAnts = int.Parse(numOfAnts.Text);
+                if (GlobalData.numAnts <= 0)
+                    throw new FormatException();
+
+                // If there are more threads than ants, reduce the number of the 
+                // threads to the number of ants.
+                GlobalData.threads = Math.Min(GlobalData.threads, GlobalData.numAnts);
 
                 // Choose which simulation method to use.
                 if (GlobalData.useTPL)
@@ -55,17 +60,20 @@ namespace AntOnCube
                 else
                     SimulationMan.Simulation();
 
-                // Calculate the mean and variance.
+                // Calculate the mean and standard deviation.
                 GlobalData.mean = StatisticsCal.findMean();
-                GlobalData.variance = StatisticsCal.findVariance();
+                GlobalData.deviation = StatisticsCal.findDeviation();
 
                 // Display the mean and variable on the screen.
                 StepMean.Text = GlobalData.mean.ToString();
-                StepVar.Text = GlobalData.variance.ToString();
+                StepVar.Text = GlobalData.deviation.ToString();
             }
             catch (FormatException)
             {
-                // If fail to parse, do nothing and wait for a valid input.
+                // If fail to parse or wrong input, clear history and wait for a valid input.
+                this.chart1.Series.Clear();
+                StepMean.Text = "";
+                StepVar.Text = "";
             }
         }
 
@@ -84,22 +92,22 @@ namespace AntOnCube
 
             // Clear the bar chart.
             this.chart1.Series.Clear();
-            this.chart1.Series.Add("Steps \n Probability");
+            this.chart1.Series.Add("Probability \n of time");
 
             // Set up the x and y axis.
             this.chart1.ChartAreas[0].AxisX.Minimum = 0;
-            this.chart1.ChartAreas[0].AxisX.Maximum = GlobalData.MaxAxisX;
+            this.chart1.ChartAreas[0].AxisX.Maximum = GlobalData.maxAxisX;
             this.chart1.ChartAreas[0].AxisY.Minimum = 0;
             this.chart1.ChartAreas[0].AxisY.Maximum = 
                 (int)(((double)GlobalData.frequency.Values.Max()/GlobalData.numAnts*100)/5+1)*5;
 
             // Set up the axis title.
-            this.chart1.ChartAreas[0].AxisX.Title = "Steps";
+            this.chart1.ChartAreas[0].AxisX.Title = "Time (in seconds)";
             this.chart1.ChartAreas[0].AxisY.Title = "Percentage";
 
             // Calculate the probability of an ant using exactly 1, 2, 3, ... , 50 steps.
             int prob = 0;
-            for (int i = 1; i <= GlobalData.MaxAxisX; i++)
+            for (int i = 1; i <= GlobalData.maxAxisX; i++)
             {
                 if (!GlobalData.frequency.ContainsKey(i))
                     prob = 0;
@@ -107,7 +115,7 @@ namespace AntOnCube
                     prob = GlobalData.frequency[i] * 100 / GlobalData.numAnts;
 
                 // Show the pair (steps, probability) on the bar chart.
-                this.chart1.Series["Steps \n Probability"].Points.AddXY(i, prob.ToString());
+                this.chart1.Series["Probability \n of time"].Points.AddXY(i, prob.ToString());
             }
         }
 

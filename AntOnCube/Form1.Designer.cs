@@ -105,11 +105,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 144);
+            this.label2.Location = new System.Drawing.Point(37, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 18);
+            this.label2.Size = new System.Drawing.Size(45, 18);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Probability of Step:";
+            this.label2.Text = "Time";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -124,20 +124,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 41);
+            this.label4.Location = new System.Drawing.Point(40, 41);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 18);
+            this.label4.Size = new System.Drawing.Size(91, 18);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Step Mean";
+            this.label4.Text = "Mean Time";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 95);
+            this.label5.Location = new System.Drawing.Point(37, 75);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 18);
+            this.label5.Size = new System.Drawing.Size(147, 18);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Step Variance";
+            this.label5.Text = "Standard deviation";
             // 
             // StepMean
             // 
@@ -152,7 +152,7 @@
             // StepVar
             // 
             this.StepVar.AutoSize = true;
-            this.StepVar.Location = new System.Drawing.Point(218, 95);
+            this.StepVar.Location = new System.Drawing.Point(218, 75);
             this.StepVar.Name = "StepVar";
             this.StepVar.Size = new System.Drawing.Size(17, 18);
             this.StepVar.TabIndex = 16;
@@ -162,7 +162,7 @@
             // ProbOfStepRes
             // 
             this.ProbOfStepRes.AutoSize = true;
-            this.ProbOfStepRes.Location = new System.Drawing.Point(345, 144);
+            this.ProbOfStepRes.Location = new System.Drawing.Point(218, 147);
             this.ProbOfStepRes.Name = "ProbOfStepRes";
             this.ProbOfStepRes.Size = new System.Drawing.Size(17, 18);
             this.ProbOfStepRes.TabIndex = 17;
@@ -179,7 +179,7 @@
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
-            series1.Name = "Steps \\n Probability";
+            series1.Name = "Probability \\n of time";
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(402, 338);
             this.chart1.TabIndex = 18;
@@ -245,7 +245,7 @@
             // 
             // ProbOfStep
             // 
-            this.ProbOfStep.Location = new System.Drawing.Point(200, 141);
+            this.ProbOfStep.Location = new System.Drawing.Point(221, 107);
             this.ProbOfStep.Name = "ProbOfStep";
             this.ProbOfStep.Size = new System.Drawing.Size(100, 24);
             this.ProbOfStep.TabIndex = 20;
@@ -254,11 +254,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(306, 144);
+            this.label6.Location = new System.Drawing.Point(52, 147);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 18);
+            this.label6.Size = new System.Drawing.Size(117, 18);
             this.label6.TabIndex = 19;
-            this.label6.Text = "is";
+            this.label6.Text = "has probability";
             // 
             // Compute_Prob
             // 
@@ -293,7 +293,7 @@
             this.groupBox3.Size = new System.Drawing.Size(439, 448);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Step Distribution";
+            this.groupBox3.Text = "Time Distribution";
             // 
             // Form1
             // 

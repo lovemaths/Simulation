@@ -11,12 +11,12 @@ namespace AntOnCube
     public class StatisticsCal
     {
         /// <summary>
-        /// Find the mean steps
+        /// Find the mean steps (steps = time)
         /// </summary>
-        /// <returns>Mean steps</returns>
+        /// <returns>Mean steps (mean time )</returns>
         public static double findMean()
         {
-            double total = 0; // Total number of steps
+            double total = 0; // Total number of steps (seconds)
             foreach (var item in GlobalData.frequency)
             {
                 total += (double)(item.Key * item.Value);
@@ -25,10 +25,10 @@ namespace AntOnCube
         }
 
         /// <summary>
-        /// Find the variance
+        /// Find the standard deviation
         /// </summary>
-        /// <returns>Variance</returns>
-        public static double findVariance()
+        /// <returns>Standard deviation</returns>
+        public static double findDeviation()
         {
             double temp = 0;
             foreach (var item in GlobalData.frequency)
